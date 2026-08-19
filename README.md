@@ -624,7 +624,7 @@ Is file provided?
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/CareerMind-AI.git
+git clone https://github.com/Aniketkr09/CareerMind-AI.git
 ```
 
 ```bash
@@ -1276,7 +1276,42 @@ Personalized Career Roadmap
 The system could continuously adapt the roadmap as the user's skills and experience grow.
 
 ---
+## ▶️ How to Run
 
+### 🖥️ Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend:
+`http://localhost:5173`
+
+### 🐍 Backend
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Backend:
+`http://127.0.0.1:8000`
+
+### 🚀 Run Both
+
+Open **two terminals**:
+
+```text
+Terminal 1 → Frontend → npm run dev
+Terminal 2 → Backend  → uvicorn app.main:app --reload
+```
+
+---
 # 🤝 Contributing
 
 Contributions are welcome.

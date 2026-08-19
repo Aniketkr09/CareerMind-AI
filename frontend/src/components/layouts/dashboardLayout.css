@@ -1,0 +1,544 @@
+/* ============================================================
+   CareerMind AI
+   Dashboard Layout
+   AI Career Intelligence Operating System
+   ============================================================ */
+
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    --cm-layout-bg: #020617;
+    --cm-layout-bg-deep: #01030a;
+
+    --cm-layout-border: rgba(148, 163, 184, 0.10);
+    --cm-layout-border-strong: rgba(148, 163, 184, 0.16);
+
+    --cm-layout-text: #f8fafc;
+    --cm-layout-muted: #94a3b8;
+    --cm-layout-subtle: #64748b;
+
+    --cm-layout-accent: #38bdf8;
+    --cm-layout-accent-soft: rgba(56, 189, 248, 0.12);
+
+    --cm-layout-success: #34d399;
+
+    --cm-layout-navbar-height: 76px;
+}
+
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+
+.cm-dashboard-layout {
+    position: relative;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    width: 100%;
+
+    background:
+        radial-gradient(circle at 50% -20%,
+            rgba(14, 165, 233, 0.08),
+            transparent 38%),
+        var(--cm-layout-bg);
+
+    color: var(--cm-layout-text);
+
+    overflow-x: hidden;
+
+    isolation: isolate;
+}
+
+
+/* ============================================================
+   AMBIENT BACKGROUND
+   ============================================================ */
+
+.cm-dashboard-ambient {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -1;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   GRID
+   ============================================================ */
+
+.cm-dashboard-grid {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.30;
+
+    background-image:
+        linear-gradient(rgba(148, 163, 184, 0.045) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(148, 163, 184, 0.045) 1px,
+            transparent 1px);
+
+    background-size:
+        56px 56px;
+
+    mask-image:
+        linear-gradient(to bottom,
+            black 0%,
+            rgba(0, 0, 0, 0.75) 50%,
+            transparent 100%);
+
+    -webkit-mask-image:
+        linear-gradient(to bottom,
+            black 0%,
+            rgba(0, 0, 0, 0.75) 50%,
+            transparent 100%);
+}
+
+
+/* ============================================================
+   AI GLOWS
+   ============================================================ */
+
+.cm-dashboard-glow {
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    opacity: 0.12;
+}
+
+
+.cm-dashboard-glow-one {
+    top: -160px;
+    left: 15%;
+
+    background: #0ea5e9;
+
+    animation:
+        cmGlowFloatOne 14s ease-in-out infinite;
+}
+
+
+.cm-dashboard-glow-two {
+    top: 35%;
+    right: -180px;
+
+    background: #6366f1;
+
+    animation:
+        cmGlowFloatTwo 18s ease-in-out infinite;
+}
+
+
+.cm-dashboard-glow-three {
+    bottom: -220px;
+    left: 30%;
+
+    background: #06b6d4;
+
+    animation:
+        cmGlowFloatThree 20s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   BACKGROUND NOISE
+   ============================================================ */
+
+.cm-dashboard-noise {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.025;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+
+    mix-blend-mode: overlay;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.cm-dashboard-header {
+    position: relative;
+
+    z-index: 100;
+
+    width: 100%;
+}
+
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+
+.cm-dashboard-main {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    min-height:
+        calc(100vh - var(--cm-layout-navbar-height));
+
+    min-height:
+        calc(100dvh - var(--cm-layout-navbar-height));
+
+    padding:
+        28px 28px 64px;
+}
+
+
+/* ============================================================
+   CONTENT CONTAINER
+   ============================================================ */
+
+.cm-dashboard-container {
+    width: min(1480px,
+            100%);
+
+    margin-inline: auto;
+}
+
+
+/* ============================================================
+   WORKSPACE
+   ============================================================ */
+
+.cm-dashboard-workspace {
+    width: 100%;
+
+    min-width: 0;
+
+    position: relative;
+}
+
+
+/* ============================================================
+   GLOBAL AI STATUS
+   ============================================================ */
+
+.cm-ai-system-status {
+    position: fixed;
+
+    right: 22px;
+    bottom: 20px;
+
+    z-index: 200;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 34px;
+
+    padding:
+        7px 12px;
+
+    border:
+        1px solid rgba(52, 211, 153, 0.16);
+
+    border-radius: 999px;
+
+    background:
+        rgba(2, 6, 23, 0.82);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.30);
+
+    color: var(--cm-layout-muted);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+
+    text-transform: uppercase;
+}
+
+
+.cm-ai-status-indicator {
+    position: relative;
+
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background:
+        var(--cm-layout-success);
+
+    box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.08),
+        0 0 14px rgba(52, 211, 153, 0.65);
+}
+
+
+.cm-ai-status-indicator::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border:
+        1px solid rgba(52, 211, 153, 0.30);
+
+    border-radius: 50%;
+
+    animation:
+        cmStatusPulse 2s ease-out infinite;
+}
+
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+
+.cm-dashboard-skip-link {
+    position: fixed;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 1000;
+
+    transform:
+        translateY(-160%);
+
+    padding:
+        10px 16px;
+
+    border-radius: 10px;
+
+    background:
+        #f8fafc;
+
+    color:
+        #020617;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 180ms ease;
+}
+
+
+.cm-dashboard-skip-link:focus {
+    transform:
+        translateY(0);
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes cmGlowFloatOne {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(80px, 45px, 0);
+    }
+}
+
+
+@keyframes cmGlowFloatTwo {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(-70px, -40px, 0);
+    }
+}
+
+
+@keyframes cmGlowFloatThree {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(55px, -35px, 0);
+    }
+}
+
+
+@keyframes cmStatusPulse {
+    0% {
+        opacity: 0.8;
+        transform: scale(0.8);
+    }
+
+    70% {
+        opacity: 0;
+        transform: scale(1.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.7);
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    .cm-dashboard-main {
+        padding:
+            24px 20px 56px;
+    }
+
+    .cm-dashboard-glow {
+        width: 340px;
+        height: 340px;
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+    :root {
+        --cm-layout-navbar-height: 64px;
+    }
+
+    .cm-dashboard-main {
+        min-height:
+            calc(100vh - 64px);
+
+        min-height:
+            calc(100dvh - 64px);
+
+        padding:
+            18px 14px 54px;
+    }
+
+    .cm-dashboard-grid {
+        background-size:
+            42px 42px;
+    }
+
+    .cm-dashboard-glow {
+        width: 260px;
+        height: 260px;
+
+        filter: blur(70px);
+
+        opacity: 0.09;
+    }
+
+    .cm-ai-system-status {
+        right: 12px;
+        bottom: 12px;
+
+        padding:
+            6px 10px;
+
+        font-size: 10px;
+    }
+
+    .cm-ai-status-text {
+        display: none;
+    }
+
+    .cm-ai-system-status {
+        width: 30px;
+        height: 30px;
+
+        justify-content: center;
+
+        padding: 0;
+    }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+    .cm-dashboard-main {
+        padding:
+            14px 10px 48px;
+    }
+
+    .cm-dashboard-glow-one {
+        left: -160px;
+    }
+
+    .cm-dashboard-glow-two {
+        right: -200px;
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cm-dashboard-glow-one,
+    .cm-dashboard-glow-two,
+    .cm-dashboard-glow-three,
+    .cm-ai-status-indicator::after {
+        animation: none;
+    }
+
+    .cm-dashboard-skip-link {
+        transition: none;
+    }
+}

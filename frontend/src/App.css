@@ -1,0 +1,1000 @@
+/* ============================================================
+   CareerMind AI
+   APP.CSS
+   Global Application Shell
+   Professional AI Career Intelligence UI
+   ============================================================ */
+
+/* ============================================================
+   01. DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    --cm-bg: #020617;
+    --cm-bg-deep: #01040b;
+    --cm-bg-soft: #07111f;
+
+    --cm-surface: rgba(8, 18, 34, 0.88);
+    --cm-surface-strong: #0a1628;
+    --cm-surface-soft: rgba(15, 23, 42, 0.72);
+
+    --cm-cyan: #22d3ee;
+    --cm-cyan-bright: #67e8f9;
+
+    --cm-blue: #3b82f6;
+    --cm-indigo: #6366f1;
+
+    --cm-violet: #8b5cf6;
+    --cm-purple: #a78bfa;
+
+    --cm-green: #34d399;
+    --cm-yellow: #fbbf24;
+    --cm-red: #fb7185;
+
+    --cm-text: #f8fafc;
+    --cm-text-soft: #cbd5e1;
+    --cm-text-muted: #94a3b8;
+    --cm-text-dim: #64748b;
+
+    --cm-border: rgba(148, 163, 184, 0.14);
+    --cm-border-light: rgba(148, 163, 184, 0.08);
+    --cm-border-active: rgba(34, 211, 238, 0.42);
+
+    --cm-radius-sm: 10px;
+    --cm-radius-md: 14px;
+    --cm-radius-lg: 20px;
+    --cm-radius-xl: 26px;
+
+    --cm-font:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    --cm-display:
+        "Space Grotesk",
+        Inter,
+        system-ui,
+        sans-serif;
+
+    --cm-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.38);
+
+    --cm-transition:
+        180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+/* ============================================================
+   02. RESET
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    min-height: 100%;
+    background: var(--cm-bg);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+
+    background:
+        radial-gradient(circle at 15% 10%,
+            rgba(34, 211, 238, 0.035),
+            transparent 28%),
+        radial-gradient(circle at 85% 90%,
+            rgba(139, 92, 246, 0.04),
+            transparent 30%),
+        var(--cm-bg);
+
+    color: var(--cm-text);
+
+    font-family: var(--cm-font);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ============================================================
+   03. ROOT APPLICATION
+   ============================================================ */
+
+#root {
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+
+/* ============================================================
+   04. APPLICATION SHELL
+   ============================================================ */
+
+.app {
+    position: relative;
+
+    min-width: 320px;
+    min-height: 100vh;
+
+    isolation: isolate;
+
+    background:
+        linear-gradient(180deg,
+            rgba(2, 6, 23, 0.96),
+            rgba(2, 6, 23, 1));
+}
+
+.app::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -3;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at 12% 12%,
+            rgba(34, 211, 238, 0.045),
+            transparent 28%),
+        radial-gradient(circle at 88% 82%,
+            rgba(99, 102, 241, 0.045),
+            transparent 30%);
+}
+
+.app::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+    opacity: 0.18;
+
+    background-image:
+        linear-gradient(rgba(148, 163, 184, 0.025) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(148, 163, 184, 0.025) 1px,
+            transparent 1px);
+
+    background-size: 56px 56px;
+
+    mask-image:
+        radial-gradient(ellipse at center,
+            black 10%,
+            transparent 78%);
+
+    -webkit-mask-image:
+        radial-gradient(ellipse at center,
+            black 10%,
+            transparent 78%);
+}
+
+
+/* ============================================================
+   05. PAGE CONTAINER
+   ============================================================ */
+
+.page-container {
+    width: min(1440px, calc(100% - 48px));
+
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   06. GLOBAL AI STATUS
+   ============================================================ */
+
+.ai-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 30px;
+
+    padding: 6px 11px;
+
+    border: 1px solid rgba(34, 211, 238, 0.16);
+    border-radius: 999px;
+
+    background:
+        rgba(34, 211, 238, 0.045);
+
+    color: var(--cm-cyan-bright);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.ai-status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--cm-green);
+
+    box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.08),
+        0 0 14px rgba(52, 211, 153, 0.8);
+
+    animation: cmStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes cmStatusPulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ============================================================
+   07. GLOBAL CARD
+   ============================================================ */
+
+.cm-card {
+    position: relative;
+
+    border: 1px solid var(--cm-border);
+
+    border-radius: var(--cm-radius-lg);
+
+    background:
+        linear-gradient(145deg,
+            rgba(10, 23, 42, 0.92),
+            rgba(4, 12, 25, 0.94));
+
+    box-shadow:
+        var(--cm-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    overflow: hidden;
+
+    isolation: isolate;
+}
+
+.cm-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 12%;
+    right: 12%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(34, 211, 238, 0.35),
+            rgba(139, 92, 246, 0.35),
+            transparent);
+
+    opacity: 0.7;
+
+    pointer-events: none;
+}
+
+.cm-card:hover {
+    border-color:
+        rgba(148, 163, 184, 0.22);
+}
+
+
+/* ============================================================
+   08. AI GRADIENT TEXT
+   ============================================================ */
+
+.ai-gradient-text {
+    background:
+        linear-gradient(90deg,
+            var(--cm-cyan-bright),
+            #60a5fa 48%,
+            var(--cm-purple));
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* ============================================================
+   09. GLOBAL BUTTONS
+   ============================================================ */
+
+.cm-button {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 46px;
+
+    padding: 0 18px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(135deg,
+            #0891b2,
+            #2563eb 52%,
+            #7c3aed);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.18);
+
+    transition:
+        transform var(--cm-transition),
+        box-shadow var(--cm-transition),
+        filter var(--cm-transition);
+}
+
+.cm-button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 18px 38px rgba(37, 99, 235, 0.28);
+}
+
+.cm-button:active {
+    transform: translateY(0) scale(0.985);
+}
+
+.cm-button:disabled {
+    opacity: 0.55;
+    filter: grayscale(0.2);
+    box-shadow: none;
+}
+
+.cm-button-secondary {
+    color: var(--cm-text-soft);
+
+    background:
+        rgba(15, 23, 42, 0.72);
+
+    border-color:
+        rgba(148, 163, 184, 0.16);
+
+    box-shadow: none;
+}
+
+.cm-button-secondary:hover {
+    color: #ffffff;
+
+    border-color:
+        rgba(34, 211, 238, 0.32);
+
+    background:
+        rgba(15, 23, 42, 0.95);
+}
+
+
+/* ============================================================
+   10. GLOBAL FORM ELEMENTS
+   ============================================================ */
+
+.cm-input {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid rgba(100, 116, 139, 0.24);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: var(--cm-text);
+
+    background:
+        rgba(7, 17, 31, 0.86);
+
+    transition:
+        border-color var(--cm-transition),
+        box-shadow var(--cm-transition),
+        background var(--cm-transition);
+}
+
+.cm-input::placeholder {
+    color: var(--cm-text-dim);
+}
+
+.cm-input:hover {
+    border-color:
+        rgba(148, 163, 184, 0.32);
+}
+
+.cm-input:focus {
+    border-color:
+        var(--cm-cyan);
+
+    background:
+        rgba(8, 22, 40, 0.95);
+
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.07);
+}
+
+
+/* ============================================================
+   11. GLOBAL LOADING SCREEN
+   ============================================================ */
+
+.app-loading {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(circle at 50% 30%,
+            rgba(34, 211, 238, 0.07),
+            transparent 35%),
+        var(--cm-bg);
+}
+
+.app-loading-content {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 18px;
+
+    text-align: center;
+}
+
+.app-loading-orbit {
+    position: relative;
+
+    width: 66px;
+    height: 66px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(34, 211, 238, 0.12);
+
+    border-radius: 50%;
+
+    animation:
+        cmOrbitRotate 4s linear infinite;
+}
+
+.app-loading-orbit::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border:
+        1px dashed rgba(99, 102, 241, 0.35);
+
+    border-radius: 50%;
+}
+
+.app-loading-orbit::after {
+    content: "";
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(135deg,
+            var(--cm-cyan),
+            var(--cm-indigo));
+
+    box-shadow:
+        0 0 25px rgba(34, 211, 238, 0.65);
+}
+
+@keyframes cmOrbitRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.app-loading-content strong {
+    color: var(--cm-text);
+
+    font-family: var(--cm-display);
+
+    font-size: 17px;
+}
+
+.app-loading-content p {
+    margin: 4px 0 0;
+
+    color: var(--cm-text-muted);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   12. AUTH LOADING
+   ============================================================ */
+
+.auth-loading {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    padding: 30px;
+
+    color: var(--cm-text);
+
+    background:
+        radial-gradient(circle at center,
+            rgba(34, 211, 238, 0.055),
+            transparent 38%),
+        var(--cm-bg);
+}
+
+.auth-loading-orbit {
+    position: relative;
+
+    width: 54px;
+    height: 54px;
+
+    border:
+        1px solid rgba(34, 211, 238, 0.2);
+
+    border-radius: 50%;
+
+    animation:
+        cmAuthRotate 3s linear infinite;
+}
+
+.auth-loading-orbit::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border:
+        1px dashed rgba(139, 92, 246, 0.35);
+
+    border-radius: 50%;
+}
+
+.auth-loading-orbit span {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--cm-cyan-bright);
+
+    box-shadow:
+        0 0 12px rgba(103, 232, 249, 0.8);
+}
+
+.auth-loading-orbit span:nth-child(1) {
+    top: -3px;
+    left: 50%;
+}
+
+.auth-loading-orbit span:nth-child(2) {
+    right: -3px;
+    bottom: 8px;
+}
+
+.auth-loading-orbit span:nth-child(3) {
+    left: -3px;
+    bottom: 8px;
+}
+
+@keyframes cmAuthRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.auth-loading strong {
+    display: block;
+
+    font-family: var(--cm-display);
+
+    font-size: 17px;
+}
+
+.auth-loading p {
+    margin: 5px 0 0;
+
+    color: var(--cm-text-muted);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   13. TOAST / STATUS MESSAGE
+   ============================================================ */
+
+.cm-toast {
+    position: fixed;
+
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 9999;
+
+    width: min(380px, calc(100vw - 32px));
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    border:
+        1px solid rgba(148, 163, 184, 0.16);
+
+    border-radius: 14px;
+
+    background:
+        rgba(7, 17, 31, 0.94);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation:
+        cmToastIn 0.35s ease both;
+}
+
+@keyframes cmToastIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cm-toast-success {
+    border-color:
+        rgba(52, 211, 153, 0.25);
+}
+
+.cm-toast-error {
+    border-color:
+        rgba(251, 113, 133, 0.25);
+}
+
+.cm-toast-title {
+    color: var(--cm-text);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.cm-toast-message {
+    margin-top: 3px;
+
+    color: var(--cm-text-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   14. PAGE TRANSITION
+   ============================================================ */
+
+.page-enter {
+    animation:
+        cmPageEnter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes cmPageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================================================
+   15. DIVIDER
+   ============================================================ */
+
+.cm-divider {
+    width: 100%;
+    height: 1px;
+
+    border: 0;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(148, 163, 184, 0.14),
+            transparent);
+}
+
+
+/* ============================================================
+   16. BADGES
+   ============================================================ */
+
+.cm-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 5px 9px;
+
+    border:
+        1px solid rgba(148, 163, 184, 0.14);
+
+    border-radius: 999px;
+
+    color: var(--cm-text-muted);
+
+    background:
+        rgba(15, 23, 42, 0.6);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.cm-badge-success {
+    color: #86efac;
+
+    border-color:
+        rgba(52, 211, 153, 0.18);
+
+    background:
+        rgba(52, 211, 153, 0.055);
+}
+
+.cm-badge-ai {
+    color: var(--cm-cyan-bright);
+
+    border-color:
+        rgba(34, 211, 238, 0.18);
+
+    background:
+        rgba(34, 211, 238, 0.05);
+}
+
+
+/* ============================================================
+   17. ACCESSIBILITY
+   ============================================================ */
+
+:focus-visible {
+    outline:
+        2px solid var(--cm-cyan);
+
+    outline-offset: 3px;
+}
+
+::selection {
+    color: #ffffff;
+
+    background:
+        rgba(34, 211, 238, 0.28);
+}
+
+
+/* ============================================================
+   18. SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+
+    background:
+        #1e293b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        #334155;
+}
+
+
+/* ============================================================
+   19. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    .page-container {
+        width:
+            min(100%,
+                calc(100% - 36px));
+    }
+}
+
+@media (max-width: 700px) {
+    .page-container {
+        width:
+            calc(100% - 28px);
+    }
+
+    .cm-toast {
+        right: 14px;
+        bottom: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-container {
+        width:
+            calc(100% - 22px);
+    }
+
+    .auth-loading {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+/* ============================================================
+   20. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ============================================================
+   21. UTILITY CLASSES
+   ============================================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--cm-text-muted) !important;
+}
+
+.text-cyan {
+    color: var(--cm-cyan-bright) !important;
+}
+
+.text-success {
+    color: var(--cm-green) !important;
+}
+
+.w-full {
+    width: 100%;
+}

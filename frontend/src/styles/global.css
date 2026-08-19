@@ -1,0 +1,1168 @@
+/* =========================================================
+   CareerMind AI
+   GLOBAL.CSS
+   AI Career Intelligence — Global Design System
+   ========================================================= */
+
+/* =========================================================
+   1. FONT SYSTEM
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+);
+
+
+/* =========================================================
+   2. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+    /* -----------------------------------------
+       Core Background
+       ----------------------------------------- */
+
+    --cm-bg: #020617;
+    --cm-bg-deep: #01040d;
+    --cm-bg-soft: #07111f;
+
+    /* -----------------------------------------
+       Surfaces
+       ----------------------------------------- */
+
+    --cm-surface: #081321;
+    --cm-surface-soft: #0b1728;
+    --cm-surface-raised: #0e1b2f;
+    --cm-surface-hover: #111f34;
+
+    /* -----------------------------------------
+       Brand
+       ----------------------------------------- */
+
+    --cm-cyan: #22d3ee;
+    --cm-cyan-bright: #67e8f9;
+
+    --cm-blue: #3b82f6;
+    --cm-blue-bright: #60a5fa;
+
+    --cm-indigo: #6366f1;
+
+    --cm-violet: #8b5cf6;
+    --cm-purple: #a78bfa;
+
+    /* -----------------------------------------
+       Semantic
+       ----------------------------------------- */
+
+    --cm-success: #34d399;
+    --cm-success-soft: #6ee7b7;
+
+    --cm-warning: #fbbf24;
+    --cm-warning-soft: #fde68a;
+
+    --cm-danger: #fb7185;
+    --cm-danger-soft: #fda4af;
+
+    --cm-info: #38bdf8;
+
+    /* -----------------------------------------
+       Typography
+       ----------------------------------------- */
+
+    --cm-text: #f8fafc;
+    --cm-text-soft: #e2e8f0;
+    --cm-text-muted: #94a3b8;
+    --cm-text-dim: #64748b;
+    --cm-text-faint: #475569;
+
+    /* -----------------------------------------
+       Borders
+       ----------------------------------------- */
+
+    --cm-border: rgba(148, 163, 184, 0.14);
+    --cm-border-soft: rgba(148, 163, 184, 0.09);
+    --cm-border-strong: rgba(148, 163, 184, 0.22);
+
+    --cm-border-cyan: rgba(34, 211, 238, 0.35);
+    --cm-border-blue: rgba(59, 130, 246, 0.35);
+    --cm-border-violet: rgba(139, 92, 246, 0.35);
+
+    /* -----------------------------------------
+       Gradients
+       ----------------------------------------- */
+
+    --cm-gradient-primary:
+        linear-gradient(135deg,
+            #0891b2 0%,
+            #2563eb 48%,
+            #7c3aed 100%);
+
+    --cm-gradient-brand:
+        linear-gradient(90deg,
+            #67e8f9,
+            #60a5fa,
+            #a78bfa);
+
+    --cm-gradient-surface:
+        linear-gradient(145deg,
+            rgba(13, 24, 43, 0.96),
+            rgba(4, 12, 24, 0.98));
+
+    /* -----------------------------------------
+       Shadows
+       ----------------------------------------- */
+
+    --cm-shadow-sm:
+        0 4px 16px rgba(0, 0, 0, 0.22);
+
+    --cm-shadow-md:
+        0 12px 35px rgba(0, 0, 0, 0.32);
+
+    --cm-shadow-lg:
+        0 24px 70px rgba(0, 0, 0, 0.42);
+
+    --cm-shadow-xl:
+        0 40px 100px rgba(0, 0, 0, 0.55);
+
+    --cm-glow-cyan:
+        0 0 30px rgba(34, 211, 238, 0.12);
+
+    --cm-glow-blue:
+        0 0 35px rgba(59, 130, 246, 0.14);
+
+    --cm-glow-violet:
+        0 0 35px rgba(139, 92, 246, 0.14);
+
+    /* -----------------------------------------
+       Radius
+       ----------------------------------------- */
+
+    --cm-radius-xs: 6px;
+    --cm-radius-sm: 10px;
+    --cm-radius-md: 14px;
+    --cm-radius-lg: 18px;
+    --cm-radius-xl: 22px;
+    --cm-radius-2xl: 28px;
+
+    /* -----------------------------------------
+       Layout
+       ----------------------------------------- */
+
+    --cm-content-width: 1280px;
+    --cm-content-wide: 1440px;
+
+    --cm-header-height: 76px;
+
+    /* -----------------------------------------
+       Typography
+       ----------------------------------------- */
+
+    --cm-font:
+        "Inter",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    --cm-display:
+        "Space Grotesk",
+        "Inter",
+        system-ui,
+        sans-serif;
+
+    /* -----------------------------------------
+       Motion
+       ----------------------------------------- */
+
+    --cm-transition-fast:
+        150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    --cm-transition:
+        220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    --cm-transition-slow:
+        420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    /* -----------------------------------------
+       Z-index
+       ----------------------------------------- */
+
+    --cm-z-base: 1;
+    --cm-z-content: 10;
+    --cm-z-header: 100;
+    --cm-z-overlay: 500;
+    --cm-z-modal: 1000;
+    --cm-z-toast: 2000;
+}
+
+
+/* =========================================================
+   3. MODERN RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    width: 100%;
+    min-width: 320px;
+    min-height: 100%;
+
+    background: var(--cm-bg);
+
+    scroll-behavior: smooth;
+
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+body {
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: var(--cm-font);
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: var(--cm-text);
+
+    background:
+        radial-gradient(circle at 15% 10%,
+            rgba(34, 211, 238, 0.025),
+            transparent 30%),
+        radial-gradient(circle at 85% 90%,
+            rgba(139, 92, 246, 0.025),
+            transparent 30%),
+        var(--cm-bg);
+
+    overflow-x: hidden;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   4. ROOT APPLICATION
+   ========================================================= */
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   5. DEFAULT ELEMENTS
+   ========================================================= */
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+img,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+img {
+    height: auto;
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+textarea {
+    resize: vertical;
+}
+
+
+input,
+textarea,
+select {
+    outline: none;
+}
+
+
+/* =========================================================
+   6. HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--cm-display);
+    color: var(--cm-text);
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    letter-spacing: -0.025em;
+}
+
+
+h1 {
+    font-size: clamp(2.25rem, 5vw, 4.8rem);
+}
+
+
+h2 {
+    font-size: clamp(1.9rem, 4vw, 3.4rem);
+}
+
+
+h3 {
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+
+p {
+    color: var(--cm-text-muted);
+}
+
+
+/* =========================================================
+   7. GLOBAL TEXT UTILITIES
+   ========================================================= */
+
+.text-gradient {
+    background: var(--cm-gradient-brand);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.text-primary {
+    color: var(--cm-text) !important;
+}
+
+
+.text-soft {
+    color: var(--cm-text-soft) !important;
+}
+
+
+.text-muted {
+    color: var(--cm-text-muted) !important;
+}
+
+
+.text-dim {
+    color: var(--cm-text-dim) !important;
+}
+
+
+.text-cyan {
+    color: var(--cm-cyan-bright) !important;
+}
+
+
+.text-blue {
+    color: var(--cm-blue-bright) !important;
+}
+
+
+.text-violet {
+    color: var(--cm-purple) !important;
+}
+
+
+.text-success {
+    color: var(--cm-success) !important;
+}
+
+
+.text-danger {
+    color: var(--cm-danger) !important;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+
+.text-left {
+    text-align: left;
+}
+
+
+.text-right {
+    text-align: right;
+}
+
+
+/* =========================================================
+   8. GLOBAL APP SHELL
+   ========================================================= */
+
+.app-shell {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--cm-bg);
+}
+
+
+.page-shell {
+    position: relative;
+
+    width: min(var(--cm-content-width),
+            calc(100% - 48px));
+
+    margin: 0 auto;
+}
+
+
+.page-shell-wide {
+    position: relative;
+
+    width: min(var(--cm-content-wide),
+            calc(100% - 48px));
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   9. GLOBAL GLASS SURFACE
+   ========================================================= */
+
+.glass {
+    border: 1px solid var(--cm-border);
+
+    background:
+        linear-gradient(145deg,
+            rgba(13, 24, 43, 0.78),
+            rgba(5, 13, 25, 0.82));
+
+    box-shadow:
+        var(--cm-shadow-lg),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+
+.surface {
+    border: 1px solid var(--cm-border);
+
+    border-radius: var(--cm-radius-lg);
+
+    background: var(--cm-surface);
+
+    box-shadow: var(--cm-shadow-md);
+}
+
+
+.surface-raised {
+    border: 1px solid var(--cm-border);
+
+    border-radius: var(--cm-radius-xl);
+
+    background: var(--cm-surface-raised);
+
+    box-shadow: var(--cm-shadow-lg);
+}
+
+
+/* =========================================================
+   10. BUTTON FOUNDATION
+   ========================================================= */
+
+.cm-button {
+    position: relative;
+
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 18px;
+
+    border: 1px solid transparent;
+
+    border-radius: var(--cm-radius-md);
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        transform var(--cm-transition),
+        box-shadow var(--cm-transition),
+        border-color var(--cm-transition),
+        background var(--cm-transition),
+        filter var(--cm-transition);
+}
+
+
+.cm-button:hover {
+    transform: translateY(-1px);
+}
+
+
+.cm-button:active {
+    transform: translateY(0) scale(0.985);
+}
+
+
+.cm-button:disabled {
+    opacity: 0.55;
+
+    transform: none;
+
+    filter: grayscale(0.15);
+}
+
+
+/* PRIMARY */
+
+.cm-button-primary {
+    color: #ffffff;
+
+    background: var(--cm-gradient-primary);
+
+    border-color: rgba(103, 232, 249, 0.18);
+
+    box-shadow:
+        0 10px 30px rgba(37, 99, 235, 0.22);
+}
+
+
+.cm-button-primary:hover {
+    box-shadow:
+        0 16px 40px rgba(37, 99, 235, 0.32);
+
+    filter: brightness(1.06);
+}
+
+
+/* SECONDARY */
+
+.cm-button-secondary {
+    color: var(--cm-text-soft);
+
+    background: rgba(15, 23, 42, 0.7);
+
+    border-color: var(--cm-border);
+}
+
+
+.cm-button-secondary:hover {
+    color: var(--cm-text);
+
+    border-color: var(--cm-border-strong);
+
+    background: rgba(30, 41, 59, 0.8);
+}
+
+
+/* GHOST */
+
+.cm-button-ghost {
+    color: var(--cm-text-muted);
+
+    background: transparent;
+
+    border-color: transparent;
+}
+
+
+.cm-button-ghost:hover {
+    color: var(--cm-cyan-bright);
+
+    background: rgba(34, 211, 238, 0.06);
+}
+
+
+/* =========================================================
+   11. BADGES
+   ========================================================= */
+
+.cm-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    min-height: 28px;
+
+    padding: 0 11px;
+
+    border: 1px solid var(--cm-border);
+
+    border-radius: 999px;
+
+    color: var(--cm-text-muted);
+
+    background: rgba(15, 23, 42, 0.58);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.cm-badge-ai {
+    color: var(--cm-cyan-bright);
+
+    border-color: rgba(34, 211, 238, 0.18);
+
+    background: rgba(34, 211, 238, 0.055);
+}
+
+
+.cm-badge-success {
+    color: var(--cm-success);
+
+    border-color: rgba(52, 211, 153, 0.18);
+
+    background: rgba(52, 211, 153, 0.055);
+}
+
+
+.cm-badge-warning {
+    color: var(--cm-warning);
+
+    border-color: rgba(251, 191, 36, 0.18);
+
+    background: rgba(251, 191, 36, 0.055);
+}
+
+
+.cm-badge-danger {
+    color: var(--cm-danger);
+
+    border-color: rgba(251, 113, 133, 0.18);
+
+    background: rgba(251, 113, 133, 0.055);
+}
+
+
+/* =========================================================
+   12. STATUS INDICATOR
+   ========================================================= */
+
+.cm-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--cm-text-muted);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.cm-status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--cm-success);
+
+    box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.08),
+        0 0 14px rgba(52, 211, 153, 0.65);
+
+    animation: cmStatusPulse 2.4s ease-in-out infinite;
+}
+
+
+@keyframes cmStatusPulse {
+
+    0%,
+    100% {
+        opacity: 0.65;
+        transform: scale(0.92);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   13. DIVIDER
+   ========================================================= */
+
+.cm-divider {
+    width: 100%;
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(148, 163, 184, 0.14),
+            transparent);
+}
+
+
+/* =========================================================
+   14. LOADING SYSTEM
+   ========================================================= */
+
+.cm-loading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    color: var(--cm-text-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.cm-spinner {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid rgba(148, 163, 184, 0.18);
+
+    border-top-color: var(--cm-cyan);
+
+    border-radius: 50%;
+
+    animation: cmSpin 0.8s linear infinite;
+}
+
+
+@keyframes cmSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   15. ERROR / SUCCESS MESSAGES
+   ========================================================= */
+
+.cm-alert {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    border-radius: var(--cm-radius-md);
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+.cm-alert-error {
+    color: var(--cm-danger-soft);
+
+    border: 1px solid rgba(251, 113, 133, 0.22);
+
+    background: rgba(127, 29, 29, 0.14);
+}
+
+
+.cm-alert-success {
+    color: var(--cm-success-soft);
+
+    border: 1px solid rgba(52, 211, 153, 0.2);
+
+    background: rgba(6, 78, 59, 0.14);
+}
+
+
+.cm-alert-info {
+    color: #bae6fd;
+
+    border: 1px solid rgba(56, 189, 248, 0.2);
+
+    background: rgba(7, 89, 133, 0.14);
+}
+
+
+/* =========================================================
+   16. SCREEN READER
+   ========================================================= */
+
+.sr-only {
+    position: absolute !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    padding: 0 !important;
+    margin: -1px !important;
+
+    overflow: hidden !important;
+
+    clip: rect(0, 0, 0, 0) !important;
+
+    white-space: nowrap !important;
+
+    border: 0 !important;
+}
+
+
+/* =========================================================
+   17. VISIBILITY UTILITIES
+   ========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+.visible {
+    display: block !important;
+}
+
+
+.flex {
+    display: flex !important;
+}
+
+
+.inline-flex {
+    display: inline-flex !important;
+}
+
+
+.grid {
+    display: grid !important;
+}
+
+
+/* =========================================================
+   18. SPACING UTILITIES
+   ========================================================= */
+
+.mt-1 {
+    margin-top: 4px;
+}
+
+.mt-2 {
+    margin-top: 8px;
+}
+
+.mt-3 {
+    margin-top: 12px;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.mt-5 {
+    margin-top: 20px;
+}
+
+.mt-6 {
+    margin-top: 24px;
+}
+
+.mt-8 {
+    margin-top: 32px;
+}
+
+.mt-10 {
+    margin-top: 40px;
+}
+
+
+.mb-1 {
+    margin-bottom: 4px;
+}
+
+.mb-2 {
+    margin-bottom: 8px;
+}
+
+.mb-3 {
+    margin-bottom: 12px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.mb-5 {
+    margin-bottom: 20px;
+}
+
+.mb-6 {
+    margin-bottom: 24px;
+}
+
+.mb-8 {
+    margin-bottom: 32px;
+}
+
+
+/* =========================================================
+   19. FOCUS SYSTEM
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--cm-cyan);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   20. SELECTION
+   ========================================================= */
+
+::selection {
+    color: #ffffff;
+
+    background: rgba(34, 211, 238, 0.28);
+}
+
+
+/* =========================================================
+   21. SCROLLBAR
+   ========================================================= */
+
+html {
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #26354a #020617;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+
+    background:
+        linear-gradient(180deg,
+            #243449,
+            #182638);
+
+    border: 2px solid #020617;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(180deg,
+            #334a63,
+            #24364b);
+}
+
+
+::-webkit-scrollbar-corner {
+    background: #020617;
+}
+
+
+/* =========================================================
+   22. PAGE TRANSITION
+   ========================================================= */
+
+.cm-page-enter {
+    animation:
+        cmPageEnter 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+
+@keyframes cmPageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   23. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-shell,
+    .page-shell-wide {
+        width: min(calc(100% - 40px),
+                var(--cm-content-width));
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    body {
+        font-size: 13px;
+    }
+
+    .page-shell,
+    .page-shell-wide {
+        width: calc(100% - 32px);
+    }
+
+    h1 {
+        font-size: clamp(2rem, 9vw, 3.2rem);
+    }
+
+    h2 {
+        font-size: clamp(1.7rem, 7vw, 2.6rem);
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .page-shell,
+    .page-shell-wide {
+        width: calc(100% - 24px);
+    }
+
+    .cm-button {
+        min-height: 42px;
+
+        padding: 0 15px;
+
+        font-size: 12px;
+    }
+
+    .cm-badge {
+        font-size: 9px;
+    }
+}
+
+
+/* =========================================================
+   24. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================================================
+   25. PRINT
+   ========================================================= */
+
+@media print {
+
+    body {
+        color: #000000;
+        background: #ffffff;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}

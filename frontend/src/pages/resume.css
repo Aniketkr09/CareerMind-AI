@@ -1,0 +1,3549 @@
+/* ============================================================
+   CareerMind AI
+   Resume Intelligence Command Center
+   Enterprise AI Career Workspace
+   ============================================================ */
+
+/* ============================================================
+   01. DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    --resume-bg: #020617;
+    --resume-bg-2: #030b17;
+    --resume-bg-3: #07111f;
+
+    --resume-surface: rgba(8, 18, 34, 0.78);
+    --resume-surface-strong: rgba(10, 22, 42, 0.94);
+    --resume-surface-soft: rgba(15, 30, 52, 0.56);
+
+    --resume-border: rgba(148, 163, 184, 0.12);
+    --resume-border-strong: rgba(99, 102, 241, 0.28);
+
+    --resume-text: #f8fafc;
+    --resume-text-soft: #cbd5e1;
+    --resume-text-muted: #8da0b8;
+    --resume-text-dim: #64748b;
+
+    --resume-cyan: #22d3ee;
+    --resume-cyan-soft: rgba(34, 211, 238, 0.12);
+
+    --resume-indigo: #6366f1;
+    --resume-indigo-soft: rgba(99, 102, 241, 0.13);
+
+    --resume-violet: #8b5cf6;
+    --resume-violet-soft: rgba(139, 92, 246, 0.12);
+
+    --resume-emerald: #34d399;
+    --resume-emerald-soft: rgba(52, 211, 153, 0.11);
+
+    --resume-amber: #fbbf24;
+    --resume-amber-soft: rgba(251, 191, 36, 0.11);
+
+    --resume-red: #fb7185;
+    --resume-red-soft: rgba(251, 113, 133, 0.11);
+
+    --resume-radius-sm: 10px;
+    --resume-radius-md: 16px;
+    --resume-radius-lg: 22px;
+    --resume-radius-xl: 30px;
+
+    --resume-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.28);
+
+    --resume-shadow-glow:
+        0 0 60px rgba(99, 102, 241, 0.12);
+
+    --resume-transition:
+        180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+/* ============================================================
+   02. PAGE FOUNDATION
+   ============================================================ */
+
+.resume-page {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        28px clamp(18px, 3vw, 48px) 70px;
+
+    color: var(--resume-text);
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 8% 0%,
+            rgba(34, 211, 238, 0.08),
+            transparent 28%),
+        radial-gradient(circle at 92% 8%,
+            rgba(99, 102, 241, 0.12),
+            transparent 30%),
+        radial-gradient(circle at 50% 85%,
+            rgba(139, 92, 246, 0.06),
+            transparent 32%),
+        linear-gradient(145deg,
+            var(--resume-bg),
+            var(--resume-bg-2) 48%,
+            var(--resume-bg-3));
+}
+
+
+/* subtle technical grid */
+
+.resume-page::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.18;
+
+    background-image:
+        linear-gradient(rgba(148, 163, 184, 0.035) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(148, 163, 184, 0.035) 1px,
+            transparent 1px);
+
+    background-size: 54px 54px;
+
+    mask-image:
+        linear-gradient(to bottom,
+            black,
+            transparent 75%);
+
+    z-index: 0;
+}
+
+
+/* ============================================================
+   03. COMMAND HEADER
+   ============================================================ */
+
+.resume-command-bar {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    max-width: 1500px;
+
+    margin: 0 auto 28px;
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(135deg,
+            rgba(10, 22, 40, 0.88),
+            rgba(5, 13, 27, 0.72));
+
+    backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.command-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.command-brand-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(135deg,
+            rgba(34, 211, 238, 0.14),
+            rgba(99, 102, 241, 0.16));
+
+    border: 1px solid rgba(34, 211, 238, 0.18);
+
+    box-shadow:
+        0 0 25px rgba(34, 211, 238, 0.08);
+}
+
+.command-brand span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+.command-brand strong {
+    display: block;
+
+    color: var(--resume-text);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.command-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--resume-emerald);
+
+    box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.08),
+        0 0 16px rgba(52, 211, 153, 0.55);
+
+    animation: resume-pulse 2s infinite;
+}
+
+.refresh-intelligence {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 10px;
+
+    color: var(--resume-text-soft);
+
+    background: rgba(255, 255, 255, 0.035);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--resume-transition);
+}
+
+.refresh-intelligence:hover:not(:disabled) {
+    color: var(--resume-text);
+
+    border-color: rgba(34, 211, 238, 0.25);
+
+    background: rgba(34, 211, 238, 0.07);
+
+    transform: translateY(-1px);
+}
+
+.refresh-intelligence:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   04. HERO
+   ============================================================ */
+
+.resume-hero {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr) minmax(340px, 0.6fr);
+
+    gap: 30px;
+
+    max-width: 1500px;
+
+    min-height: 440px;
+
+    margin: 0 auto 28px;
+
+    padding:
+        clamp(32px, 5vw, 68px) clamp(24px, 5vw, 70px);
+
+    overflow: hidden;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: var(--resume-radius-xl);
+
+    background:
+        radial-gradient(circle at 78% 50%,
+            rgba(99, 102, 241, 0.09),
+            transparent 34%),
+        linear-gradient(135deg,
+            rgba(10, 22, 40, 0.95),
+            rgba(3, 11, 24, 0.91));
+
+    box-shadow:
+        var(--resume-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.resume-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -170px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(34, 211, 238, 0.06);
+
+    box-shadow:
+        0 0 0 40px rgba(34, 211, 238, 0.025),
+        0 0 0 80px rgba(99, 102, 241, 0.02);
+
+    pointer-events: none;
+}
+
+.resume-hero-copy {
+    position: relative;
+
+    z-index: 2;
+
+    align-self: center;
+
+    max-width: 760px;
+}
+
+.resume-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 11px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(34, 211, 238, 0.18);
+
+    border-radius: 999px;
+
+    color: var(--resume-cyan);
+
+    background: rgba(34, 211, 238, 0.065);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+}
+
+.resume-hero h1 {
+    margin: 0;
+
+    max-width: 800px;
+
+    color: var(--resume-text);
+
+    font-size:
+        clamp(38px, 5vw, 70px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 800;
+}
+
+.resume-hero h1 span {
+    color: transparent;
+
+    background:
+        linear-gradient(100deg,
+            var(--resume-cyan),
+            #818cf8 48%,
+            var(--resume-violet));
+
+    background-clip: text;
+
+    -webkit-background-clip: text;
+}
+
+.resume-hero-copy>p {
+    max-width: 670px;
+
+    margin:
+        24px 0 25px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+.hero-trust {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.hero-trust span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 11px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 9px;
+
+    color: var(--resume-text-soft);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   05. HERO INTELLIGENCE CARD
+   ============================================================ */
+
+.resume-hero-intelligence {
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+
+    min-height: 330px;
+}
+
+.hero-intelligence-glow {
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(99, 102, 241, 0.26),
+            rgba(34, 211, 238, 0.06) 45%,
+            transparent 70%);
+
+    filter: blur(10px);
+
+    animation: intelligence-float 6s ease-in-out infinite;
+}
+
+.hero-intelligence-card {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100%, 380px);
+
+    padding: 22px;
+
+    border: 1px solid rgba(148, 163, 184, 0.14);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(15, 30, 54, 0.86),
+            rgba(5, 14, 29, 0.9));
+
+    backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35),
+        0 0 50px rgba(99, 102, 241, 0.08);
+
+    animation:
+        intelligence-float 6s ease-in-out infinite;
+}
+
+.hero-intelligence-top,
+.active-resume-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+.connected-state,
+.dataset-connected {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: var(--resume-emerald);
+
+    letter-spacing: 0;
+
+    font-size: 10px;
+}
+
+.hero-score {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 30px;
+}
+
+.hero-score>div:first-child {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 5px;
+}
+
+.hero-score strong {
+    color: var(--resume-text);
+
+    font-size: 70px;
+
+    line-height: 0.85;
+
+    letter-spacing: -0.07em;
+}
+
+.hero-score>div:first-child span {
+    color: var(--resume-text-dim);
+
+    font-size: 12px;
+}
+
+.hero-score small {
+    display: block;
+
+    color: var(--resume-text-dim);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+}
+
+.hero-score p {
+    margin: 5px 0 0;
+
+    color: var(--resume-cyan);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.hero-signal {
+    position: relative;
+
+    height: 42px;
+
+    margin:
+        26px 0 18px;
+
+    overflow: hidden;
+
+    border-top: 1px solid rgba(99, 102, 241, 0.15);
+
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.hero-signal::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(90deg,
+            transparent 0,
+            transparent 14px,
+            rgba(34, 211, 238, 0.04) 15px);
+}
+
+.hero-signal span {
+    position: absolute;
+
+    left: -10%;
+
+    top: 50%;
+
+    width: 120%;
+
+    height: 2px;
+
+    transform:
+        translateY(-50%) rotate(-3deg);
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            var(--resume-cyan),
+            var(--resume-indigo),
+            transparent);
+
+    box-shadow:
+        0 0 14px rgba(34, 211, 238, 0.55);
+
+    animation: signal-scan 3.5s linear infinite;
+}
+
+.hero-intelligence-footer {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+.hero-intelligence-footer div {
+    padding:
+        11px 10px;
+
+    border: 1px solid rgba(148, 163, 184, 0.08);
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.hero-intelligence-footer span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.hero-intelligence-footer strong {
+    color: var(--resume-text);
+
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   06. ALERTS
+   ============================================================ */
+
+.resume-alert {
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    max-width: 1500px;
+
+    margin:
+        0 auto 16px;
+
+    padding:
+        13px 15px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.resume-alert span {
+    flex: 1;
+}
+
+.resume-alert button {
+    display: grid;
+
+    place-items: center;
+
+    width: 28px;
+    height: 28px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    color: inherit;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    cursor: pointer;
+}
+
+.resume-alert-error {
+    border: 1px solid rgba(251, 113, 133, 0.18);
+
+    color: #fecdd3;
+
+    background: var(--resume-red-soft);
+}
+
+.resume-alert-success {
+    border: 1px solid rgba(52, 211, 153, 0.18);
+
+    color: #bbf7d0;
+
+    background: var(--resume-emerald-soft);
+}
+
+
+/* ============================================================
+   07. INTELLIGENCE NAV
+   ============================================================ */
+
+.intelligence-nav {
+    position: sticky;
+
+    top: 12px;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    width: fit-content;
+
+    max-width: 100%;
+
+    margin:
+        20px auto 34px;
+
+    padding: 5px;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 13px;
+
+    background:
+        rgba(3, 10, 22, 0.82);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.22);
+}
+
+.intelligence-nav button {
+    flex-shrink: 0;
+
+    padding: 9px 14px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    color: var(--resume-text-muted);
+
+    background: transparent;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--resume-transition);
+}
+
+.intelligence-nav button:hover {
+    color: var(--resume-text);
+
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.intelligence-nav button.active {
+    color: var(--resume-text);
+
+    background:
+        linear-gradient(135deg,
+            rgba(99, 102, 241, 0.25),
+            rgba(34, 211, 238, 0.1));
+
+    box-shadow:
+        inset 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+
+/* ============================================================
+   08. UPLOAD WORKSPACE
+   ============================================================ */
+
+.resume-upload-workspace,
+.intelligence-section,
+.ai-executive-card,
+.career-action-center {
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 1500px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resume-upload-workspace {
+    margin-bottom: 55px;
+
+    padding:
+        clamp(22px, 3vw, 34px);
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: var(--resume-radius-lg);
+
+    background:
+        linear-gradient(145deg,
+            rgba(10, 21, 38, 0.84),
+            rgba(5, 13, 27, 0.76));
+
+    box-shadow: var(--resume-shadow);
+
+    overflow: hidden;
+}
+
+.workspace-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.workspace-heading span:first-child {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+}
+
+.workspace-heading h2 {
+    margin: 0;
+
+    color: var(--resume-text);
+
+    font-size: 24px;
+
+    letter-spacing: -0.025em;
+}
+
+.workspace-heading p {
+    margin:
+        7px 0 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 12px;
+}
+
+.workspace-engine {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 11px;
+
+    border: 1px solid rgba(52, 211, 153, 0.14);
+
+    border-radius: 9px;
+
+    color: var(--resume-emerald);
+
+    background: rgba(52, 211, 153, 0.05);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+
+    white-space: nowrap;
+}
+
+.workspace-engine span {
+    width: 6px;
+    height: 6px;
+
+    margin: 0 !important;
+
+    border-radius: 50%;
+
+    background: var(--resume-emerald);
+
+    box-shadow: 0 0 10px var(--resume-emerald);
+}
+
+.upload-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr) minmax(300px, 0.6fr);
+
+    gap: 18px;
+}
+
+.upload-zone {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 280px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    border: 1px dashed rgba(99, 102, 241, 0.32);
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(99, 102, 241, 0.08),
+            transparent 55%),
+        rgba(255, 255, 255, 0.018);
+
+    transition: var(--resume-transition);
+}
+
+.upload-zone:hover {
+    border-color: rgba(34, 211, 238, 0.4);
+
+    background:
+        radial-gradient(circle at center,
+            rgba(34, 211, 238, 0.07),
+            transparent 55%),
+        rgba(255, 255, 255, 0.022);
+}
+
+.upload-zone-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 66px;
+    height: 66px;
+
+    margin-bottom: 17px;
+
+    border: 1px solid rgba(34, 211, 238, 0.17);
+
+    border-radius: 18px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(145deg,
+            rgba(34, 211, 238, 0.1),
+            rgba(99, 102, 241, 0.08));
+
+    box-shadow:
+        0 0 35px rgba(34, 211, 238, 0.07);
+}
+
+.upload-zone h3 {
+    max-width: 550px;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    color: var(--resume-text);
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.upload-zone>p {
+    margin:
+        8px 0 20px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 11px;
+}
+
+.upload-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.resume-file-button,
+.analyze-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 40px;
+
+    padding:
+        0 15px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition: var(--resume-transition);
+}
+
+.resume-file-button {
+    color: var(--resume-text-soft);
+
+    border: 1px solid var(--resume-border);
+
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.resume-file-button:hover {
+    color: var(--resume-text);
+
+    border-color: rgba(34, 211, 238, 0.25);
+
+    background: rgba(34, 211, 238, 0.07);
+
+    transform: translateY(-1px);
+}
+
+.analyze-button {
+    border: 1px solid rgba(99, 102, 241, 0.4);
+
+    color: white;
+
+    background:
+        linear-gradient(135deg,
+            #4f46e5,
+            #6366f1 55%,
+            #7c3aed);
+
+    box-shadow:
+        0 10px 25px rgba(79, 70, 229, 0.18);
+}
+
+.analyze-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 32px rgba(79, 70, 229, 0.28);
+}
+
+.analyze-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+.upload-security {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 19px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   09. ACTIVE RESUME
+   ============================================================ */
+
+.active-resume-card {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 280px;
+
+    padding: 21px;
+
+    border: 1px solid rgba(52, 211, 153, 0.13);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(52, 211, 153, 0.045),
+            rgba(10, 22, 39, 0.76));
+}
+
+.active-resume-top {
+    color: var(--resume-text-dim);
+}
+
+.active-file {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin:
+        28px 0;
+}
+
+.active-file-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    color: var(--resume-cyan);
+
+    background: rgba(34, 211, 238, 0.08);
+
+    border: 1px solid rgba(34, 211, 238, 0.12);
+}
+
+.active-file strong {
+    display: block;
+
+    max-width: 230px;
+
+    overflow: hidden;
+
+    color: var(--resume-text);
+
+    font-size: 13px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.active-file span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.active-file-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.active-file-meta div {
+    padding: 11px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.active-file-meta span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.active-file-meta strong {
+    color: var(--resume-text-soft);
+
+    font-size: 11px;
+}
+
+.active-resume-card>button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    width: 100%;
+
+    min-height: 38px;
+
+    margin-top: 14px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 10px;
+
+    color: var(--resume-text-muted);
+
+    background: rgba(255, 255, 255, 0.03);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--resume-transition);
+}
+
+.active-resume-card>button:hover {
+    color: var(--resume-text);
+
+    border-color: rgba(34, 211, 238, 0.2);
+
+    background: rgba(34, 211, 238, 0.06);
+}
+
+
+/* ============================================================
+   10. EMPTY STATE
+   ============================================================ */
+
+.resume-empty-state {
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 900px;
+
+    margin:
+        50px auto 80px;
+
+    padding:
+        65px 30px;
+
+    text-align: center;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 26px;
+
+    background:
+        radial-gradient(circle at 50% 0%,
+            rgba(99, 102, 241, 0.09),
+            transparent 42%),
+        rgba(8, 18, 34, 0.68);
+
+    box-shadow: var(--resume-shadow);
+}
+
+.empty-state-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 76px;
+    height: 76px;
+
+    margin:
+        0 auto 20px;
+
+    border-radius: 22px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(145deg,
+            rgba(34, 211, 238, 0.1),
+            rgba(99, 102, 241, 0.11));
+
+    border: 1px solid rgba(34, 211, 238, 0.15);
+
+    box-shadow:
+        0 0 45px rgba(34, 211, 238, 0.07);
+}
+
+.resume-empty-state>span {
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+}
+
+.resume-empty-state h2 {
+    max-width: 600px;
+
+    margin:
+        12px auto;
+
+    color: var(--resume-text);
+
+    font-size:
+        clamp(27px, 4vw, 40px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.04em;
+}
+
+.resume-empty-state p {
+    max-width: 650px;
+
+    margin:
+        0 auto 25px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+.resume-empty-state button,
+.career-action-center button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    border: 1px solid rgba(99, 102, 241, 0.35);
+
+    border-radius: 11px;
+
+    color: white;
+
+    background:
+        linear-gradient(135deg,
+            #4f46e5,
+            #7c3aed);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(79, 70, 229, 0.18);
+
+    transition: var(--resume-transition);
+}
+
+.resume-empty-state button:hover,
+.career-action-center button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 34px rgba(79, 70, 229, 0.27);
+}
+
+
+/* ============================================================
+   11. SECTION SYSTEM
+   ============================================================ */
+
+.intelligence-section {
+    margin-bottom: 72px;
+
+    scroll-margin-top: 90px;
+}
+
+.section-heading {
+    max-width: 760px;
+
+    margin-bottom: 27px;
+}
+
+.section-heading>span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.17em;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: var(--resume-text);
+
+    font-size:
+        clamp(26px, 3vw, 36px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.04em;
+}
+
+.section-heading p {
+    margin:
+        10px 0 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* ============================================================
+   12. SCORE GRID
+   ============================================================ */
+
+.score-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+.score-card {
+    padding: 19px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 25, 44, 0.78),
+            rgba(6, 15, 29, 0.68));
+
+    transition: var(--resume-transition);
+}
+
+.score-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(99, 102, 241, 0.24);
+
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.score-card-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 24px;
+}
+
+.score-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 31px;
+    height: 31px;
+
+    border-radius: 9px;
+
+    color: var(--resume-cyan);
+
+    background: var(--resume-cyan-soft);
+}
+
+.score-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.score-card-header span {
+    color: var(--resume-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+.score-value {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 4px;
+}
+
+.score-value strong {
+    color: var(--resume-text);
+
+    font-size: 39px;
+
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+}
+
+.score-value span {
+    color: var(--resume-text-dim);
+
+    font-size: 10px;
+}
+
+.score-track {
+    height: 4px;
+
+    margin:
+        15px 0;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(148, 163, 184, 0.08);
+}
+
+.score-track div {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(90deg,
+            var(--resume-cyan),
+            var(--resume-indigo),
+            var(--resume-violet));
+
+    box-shadow:
+        0 0 12px rgba(99, 102, 241, 0.3);
+
+    transition:
+        width 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.score-description span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 750;
+}
+
+.score-description small {
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   13. PROFILE SNAPSHOT
+   ============================================================ */
+
+.profile-snapshot {
+    display: grid;
+
+    grid-template-columns:
+        1.3fr 1fr;
+
+    gap: 20px;
+
+    margin-top: 18px;
+
+    padding: 25px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(circle at 0% 50%,
+            rgba(34, 211, 238, 0.055),
+            transparent 35%),
+        rgba(8, 18, 34, 0.68);
+}
+
+.snapshot-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.snapshot-score {
+    display: flex;
+
+    align-items: baseline;
+
+    flex-shrink: 0;
+
+    gap: 4px;
+}
+
+.snapshot-score strong {
+    color: var(--resume-text);
+
+    font-size: 70px;
+
+    line-height: 0.85;
+
+    letter-spacing: -0.07em;
+}
+
+.snapshot-score span {
+    color: var(--resume-text-dim);
+
+    font-size: 11px;
+}
+
+.snapshot-main>div:last-child>span {
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+}
+
+.snapshot-main h3 {
+    margin:
+        7px 0;
+
+    color: var(--resume-text);
+
+    font-size: 20px;
+}
+
+.snapshot-main p {
+    max-width: 520px;
+
+    margin: 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+.snapshot-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.snapshot-metric {
+    padding: 12px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.snapshot-metric span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.snapshot-metric strong {
+    color: var(--resume-text);
+
+    font-size: 18px;
+}
+
+
+/* ============================================================
+   14. EXECUTIVE AI INSIGHT
+   ============================================================ */
+
+.ai-executive-card {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    margin-bottom: 72px;
+
+    padding:
+        27px;
+
+    border: 1px solid rgba(99, 102, 241, 0.18);
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(circle at 0% 50%,
+            rgba(99, 102, 241, 0.12),
+            transparent 35%),
+        linear-gradient(135deg,
+            rgba(15, 23, 55, 0.8),
+            rgba(6, 15, 30, 0.76));
+
+    box-shadow:
+        var(--resume-shadow-glow);
+}
+
+.executive-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(135deg,
+            rgba(34, 211, 238, 0.1),
+            rgba(99, 102, 241, 0.14));
+
+    border: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.executive-content>span {
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+.executive-content h2 {
+    margin:
+        5px 0 9px;
+
+    color: var(--resume-text);
+
+    font-size: 20px;
+
+    letter-spacing: -0.025em;
+}
+
+.executive-content p {
+    max-width: 1000px;
+
+    margin: 0;
+
+    color: var(--resume-text-soft);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+/* ============================================================
+   15. CAREER DIRECTION
+   ============================================================ */
+
+.career-direction {
+    display: grid;
+
+    grid-template-columns:
+        1.35fr 0.65fr;
+
+    gap: 15px;
+}
+
+.career-direction-main,
+.career-next-move {
+    padding: 25px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 25, 44, 0.78),
+            rgba(6, 15, 29, 0.72));
+}
+
+.career-direction-main {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 17px;
+}
+
+.career-direction-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    border-radius: 16px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(135deg,
+            rgba(34, 211, 238, 0.1),
+            rgba(99, 102, 241, 0.12));
+
+    border: 1px solid rgba(34, 211, 238, 0.14);
+}
+
+.career-direction-main span,
+.career-next-move>span {
+    color: var(--resume-cyan);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+.career-direction-main h2 {
+    margin:
+        8px 0;
+
+    color: var(--resume-text);
+
+    font-size: 25px;
+
+    letter-spacing: -0.03em;
+}
+
+.career-direction-main p {
+    margin: 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+.career-next-move {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.career-next-move strong {
+    margin:
+        10px 0 18px;
+
+    color: var(--resume-text);
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+.career-next-move button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    min-height: 39px;
+
+    padding:
+        0 12px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 9px;
+
+    color: var(--resume-text-soft);
+
+    background: rgba(255, 255, 255, 0.035);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--resume-transition);
+}
+
+.career-next-move button:hover {
+    color: var(--resume-text);
+
+    border-color: rgba(34, 211, 238, 0.25);
+
+    background: rgba(34, 211, 238, 0.06);
+}
+
+
+/* ============================================================
+   16. SKILL OVERVIEW
+   ============================================================ */
+
+.skill-overview {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.skill-total,
+.skill-stat {
+    min-height: 125px;
+
+    padding: 18px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 25, 44, 0.78),
+            rgba(6, 15, 29, 0.7));
+}
+
+.skill-total span {
+    color: var(--resume-cyan);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+}
+
+.skill-total strong {
+    display: block;
+
+    margin:
+        10px 0 4px;
+
+    color: var(--resume-text);
+
+    font-size: 38px;
+
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+}
+
+.skill-total p {
+    margin: 0;
+
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+.skill-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.skill-stat-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 9px;
+
+    color: var(--resume-indigo);
+
+    background: var(--resume-indigo-soft);
+}
+
+.skill-stat-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.skill-stat strong {
+    color: var(--resume-text);
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+.skill-stat span {
+    color: var(--resume-text-muted);
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   17. SKILL GROUPS
+   ============================================================ */
+
+.skill-groups-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+.skill-group {
+    padding: 19px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 17px;
+
+    background:
+        rgba(8, 18, 34, 0.68);
+
+    transition: var(--resume-transition);
+}
+
+.skill-group:hover {
+    border-color: rgba(99, 102, 241, 0.2);
+
+    transform: translateY(-2px);
+}
+
+.skill-group-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.skill-group-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 37px;
+    height: 37px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    color: var(--resume-cyan);
+
+    background: var(--resume-cyan-soft);
+}
+
+.skill-group-header>div:nth-child(2) {
+    flex: 1;
+}
+
+.skill-group-header span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.skill-group-header h3 {
+    margin: 0;
+
+    color: var(--resume-text);
+
+    font-size: 13px;
+}
+
+.skill-group-header>strong {
+    display: grid;
+
+    place-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 8px;
+
+    color: var(--resume-cyan);
+
+    background: rgba(34, 211, 238, 0.06);
+
+    font-size: 10px;
+}
+
+.skill-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.skill-tags span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+        7px 9px;
+
+    border: 1px solid rgba(148, 163, 184, 0.1);
+
+    border-radius: 8px;
+
+    color: var(--resume-text-soft);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition: var(--resume-transition);
+}
+
+.skill-tags span:hover {
+    color: var(--resume-cyan);
+
+    border-color: rgba(34, 211, 238, 0.18);
+
+    background: rgba(34, 211, 238, 0.05);
+}
+
+.skill-tags svg {
+    color: var(--resume-emerald);
+}
+
+
+/* ============================================================
+   18. SKILL GAPS
+   ============================================================ */
+
+.gap-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.gap-card {
+    display: grid;
+
+    grid-template-columns:
+        30px 39px minmax(0, 1fr) 18px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 112px;
+
+    padding:
+        15px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 25, 44, 0.76),
+            rgba(6, 15, 29, 0.7));
+
+    transition: var(--resume-transition);
+}
+
+.gap-card:hover {
+    border-color: rgba(251, 191, 36, 0.2);
+
+    transform: translateX(3px);
+
+    background:
+        linear-gradient(145deg,
+            rgba(30, 28, 24, 0.72),
+            rgba(7, 15, 28, 0.72));
+}
+
+.gap-number {
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.gap-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 11px;
+
+    color: var(--resume-amber);
+
+    background: var(--resume-amber-soft);
+}
+
+.gap-content span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.gap-content h3 {
+    margin: 0 0 4px;
+
+    color: var(--resume-text);
+
+    font-size: 13px;
+}
+
+.gap-content p {
+    margin: 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+.gap-card>svg {
+    color: var(--resume-text-dim);
+}
+
+
+/* ============================================================
+   19. EVIDENCE
+   ============================================================ */
+
+.evidence-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.evidence-card {
+    padding: 20px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 16px;
+
+    background:
+        rgba(8, 18, 34, 0.7);
+}
+
+.evidence-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 15px;
+
+    border-radius: 10px;
+
+    color: var(--resume-violet);
+
+    background: var(--resume-violet-soft);
+}
+
+.evidence-card>span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 10px;
+}
+
+.evidence-card strong {
+    display: inline-block;
+
+    margin-right: 5px;
+
+    color: var(--resume-text);
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+}
+
+.evidence-card small {
+    color: var(--resume-text-dim);
+
+    font-size: 8px;
+}
+
+
+/* ============================================================
+   20. INSIGHT PANELS
+   ============================================================ */
+
+.insights-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.insight-panel {
+    min-height: 220px;
+
+    padding: 20px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 25, 44, 0.75),
+            rgba(6, 15, 29, 0.7));
+}
+
+.insight-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding-bottom: 14px;
+
+    margin-bottom: 3px;
+
+    border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+}
+
+.insight-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 33px;
+    height: 33px;
+
+    border-radius: 9px;
+
+    color: var(--resume-cyan);
+
+    background: var(--resume-cyan-soft);
+}
+
+.insight-header h3 {
+    margin: 0;
+
+    color: var(--resume-text);
+
+    font-size: 13px;
+}
+
+.insight-panel ul {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin: 16px 0 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+.insight-panel li {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+.insight-check,
+.insight-bullet {
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+}
+
+.insight-check {
+    color: var(--resume-emerald);
+}
+
+.insight-bullet {
+    color: var(--resume-amber);
+}
+
+.insight-empty {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+    color: var(--resume-text-dim);
+
+    font-size: 10px;
+}
+
+
+/* ============================================================
+   21. EMPTY PANELS
+   ============================================================ */
+
+.intelligence-empty-panel {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 210px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    border: 1px dashed rgba(148, 163, 184, 0.12);
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.intelligence-empty-panel>div {
+    display: grid;
+
+    place-items: center;
+
+    width: 47px;
+    height: 47px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    color: var(--resume-emerald);
+
+    background: var(--resume-emerald-soft);
+}
+
+.intelligence-empty-panel h3 {
+    margin: 0 0 6px;
+
+    color: var(--resume-text);
+
+    font-size: 14px;
+}
+
+.intelligence-empty-panel p {
+    max-width: 550px;
+
+    margin: 0;
+
+    color: var(--resume-text-dim);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   22. CAREER ACTION CENTER
+   ============================================================ */
+
+.career-action-center {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 65px;
+
+    padding:
+        60px 25px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(99, 102, 241, 0.2);
+
+    border-radius: 26px;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(99, 102, 241, 0.12),
+            transparent 45%),
+        linear-gradient(145deg,
+            rgba(12, 22, 49, 0.86),
+            rgba(4, 12, 26, 0.9));
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+.action-center-glow {
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    top: -220px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(34, 211, 238, 0.13),
+            transparent 70%);
+
+    pointer-events: none;
+}
+
+.action-center-icon {
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+
+    width: 56px;
+    height: 56px;
+
+    margin-bottom: 17px;
+
+    border-radius: 17px;
+
+    color: var(--resume-cyan);
+
+    background:
+        linear-gradient(135deg,
+            rgba(34, 211, 238, 0.1),
+            rgba(99, 102, 241, 0.14));
+
+    border: 1px solid rgba(34, 211, 238, 0.16);
+
+    box-shadow:
+        0 0 35px rgba(34, 211, 238, 0.08);
+}
+
+.career-action-center>span {
+    color: var(--resume-cyan);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+}
+
+.career-action-center h2 {
+    position: relative;
+
+    margin:
+        10px 0 8px;
+
+    color: var(--resume-text);
+
+    font-size:
+        clamp(28px, 4vw, 42px);
+
+    line-height: 1.05;
+
+    letter-spacing: -0.045em;
+}
+
+.career-action-center>p {
+    position: relative;
+
+    margin:
+        0 0 24px;
+
+    color: var(--resume-text-muted);
+
+    font-size: 12px;
+}
+
+.action-center-buttons {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.career-action-center button {
+    min-width: 180px;
+}
+
+.career-action-center .secondary-action {
+    color: var(--resume-text-soft);
+
+    border-color: var(--resume-border);
+
+    background: rgba(255, 255, 255, 0.035);
+
+    box-shadow: none;
+}
+
+.career-action-center .secondary-action:hover {
+    color: var(--resume-text);
+
+    border-color: rgba(34, 211, 238, 0.2);
+
+    background: rgba(34, 211, 238, 0.06);
+
+    box-shadow: none;
+}
+
+
+/* ============================================================
+   23. FOOTER
+   ============================================================ */
+
+.resume-footer {
+    position: relative;
+
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 20px;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding:
+        22px 0;
+
+    border-top: 1px solid var(--resume-border);
+
+    color: var(--resume-text-dim);
+
+    font-size: 9px;
+}
+
+.footer-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 4px;
+
+    color: var(--resume-text-soft);
+
+    font-size: 11px;
+}
+
+.footer-brand>div {
+    display: grid;
+
+    place-items: center;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 7px;
+
+    color: var(--resume-cyan);
+
+    background: rgba(34, 211, 238, 0.07);
+}
+
+.footer-status {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+.resume-footer>span:last-child {
+    text-align: right;
+}
+
+
+/* ============================================================
+   24. LOADING SCREEN
+   ============================================================ */
+
+.resume-loading-screen {
+    min-height: 75vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.resume-loading-core {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    max-width: 550px;
+
+    padding: 25px;
+
+    border: 1px solid var(--resume-border);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(10, 22, 40, 0.84),
+            rgba(4, 12, 25, 0.8));
+
+    box-shadow: var(--resume-shadow);
+}
+
+.resume-loading-orb {
+    display: grid;
+
+    place-items: center;
+
+    width: 64px;
+    height: 64px;
+
+    flex-shrink: 0;
+
+    border-radius: 19px;
+
+    color: var(--resume-cyan);
+
+    background:
+        radial-gradient(circle,
+            rgba(34, 211, 238, 0.18),
+            rgba(99, 102, 241, 0.08));
+
+    border: 1px solid rgba(34, 211, 238, 0.18);
+
+    box-shadow:
+        0 0 40px rgba(34, 211, 238, 0.1);
+
+    animation:
+        intelligence-float 3s ease-in-out infinite;
+}
+
+.resume-loading-core span {
+    color: var(--resume-cyan);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+}
+
+.resume-loading-core h2 {
+    margin:
+        5px 0 6px;
+
+    color: var(--resume-text);
+
+    font-size: 20px;
+}
+
+.resume-loading-core p {
+    margin: 0;
+
+    color: var(--resume-text-muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.resume-loading-track {
+    width: min(500px, 100%);
+
+    height: 3px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(148, 163, 184, 0.08);
+}
+
+.resume-loading-track div {
+    width: 45%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(90deg,
+            var(--resume-cyan),
+            var(--resume-indigo),
+            var(--resume-violet));
+
+    animation:
+        loading-progress 1.5s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   25. SPIN
+   ============================================================ */
+
+.spin {
+    animation:
+        resume-spin 0.8s linear infinite;
+}
+
+
+/* ============================================================
+   26. ANIMATIONS
+   ============================================================ */
+
+@keyframes resume-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+
+        box-shadow:
+            0 0 0 4px rgba(52, 211, 153, 0.08),
+            0 0 16px rgba(52, 211, 153, 0.55);
+    }
+
+    50% {
+        opacity: 0.65;
+
+        box-shadow:
+            0 0 0 7px rgba(52, 211, 153, 0.025),
+            0 0 22px rgba(52, 211, 153, 0.25);
+    }
+}
+
+@keyframes intelligence-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes signal-scan {
+    0% {
+        transform:
+            translateX(-35%) translateY(-50%) rotate(-3deg);
+    }
+
+    100% {
+        transform:
+            translateX(35%) translateY(-50%) rotate(-3deg);
+    }
+}
+
+@keyframes resume-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loading-progress {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    100% {
+        transform: translateX(320%);
+    }
+}
+
+
+/* ============================================================
+   27. RESPONSIVE — LARGE TABLET
+   ============================================================ */
+
+@media (max-width: 1180px) {
+
+    .resume-hero {
+        grid-template-columns:
+            1fr 360px;
+    }
+
+    .score-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .skill-overview {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .skill-total {
+        grid-column: span 3;
+    }
+
+    .evidence-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .insights-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .insights-grid .insight-panel:last-child {
+        grid-column: span 2;
+    }
+}
+
+
+/* ============================================================
+   28. RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .resume-page {
+        padding:
+            18px 18px 50px;
+    }
+
+    .resume-command-bar {
+        flex-wrap: wrap;
+    }
+
+    .command-status {
+        order: 3;
+
+        width: 100%;
+
+        padding-top: 8px;
+
+        border-top: 1px solid var(--resume-border);
+    }
+
+    .resume-hero {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .resume-hero-intelligence {
+        min-height: 320px;
+    }
+
+    .upload-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-snapshot {
+        grid-template-columns: 1fr;
+    }
+
+    .career-direction {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-overview {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .skill-total {
+        grid-column: span 2;
+    }
+
+    .skill-groups-grid,
+    .gap-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-footer {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+    }
+
+    .resume-footer>span:last-child {
+        text-align: center;
+    }
+
+    .footer-brand {
+        justify-content: center;
+    }
+}
+
+
+/* ============================================================
+   29. RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+    .resume-page {
+        padding:
+            12px 12px 40px;
+    }
+
+    .resume-command-bar {
+        padding: 11px;
+
+        border-radius: 14px;
+    }
+
+    .command-brand strong {
+        font-size: 12px;
+    }
+
+    .refresh-intelligence {
+        padding: 0 10px;
+
+        font-size: 10px;
+    }
+
+    .resume-hero {
+        padding:
+            30px 21px;
+
+        border-radius: 22px;
+    }
+
+    .resume-hero h1 {
+        font-size: 39px;
+    }
+
+    .resume-hero-copy>p {
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+    .hero-trust {
+        gap: 6px;
+    }
+
+    .hero-trust span {
+        font-size: 9px;
+
+        padding: 7px 8px;
+    }
+
+    .hero-intelligence-card {
+        padding: 17px;
+    }
+
+    .hero-score strong {
+        font-size: 57px;
+    }
+
+    .hero-score {
+        margin-top: 23px;
+    }
+
+    .intelligence-nav {
+        width: 100%;
+
+        justify-content: flex-start;
+
+        margin-bottom: 25px;
+    }
+
+    .intelligence-nav button {
+        padding:
+            8px 11px;
+
+        font-size: 10px;
+    }
+
+    .resume-upload-workspace {
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .workspace-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .workspace-heading h2 {
+        font-size: 20px;
+    }
+
+    .workspace-engine {
+        align-self: flex-start;
+    }
+
+    .upload-zone {
+        min-height: 250px;
+
+        padding: 22px 14px;
+    }
+
+    .upload-zone h3 {
+        max-width: 270px;
+
+        font-size: 14px;
+    }
+
+    .upload-actions {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .resume-file-button,
+    .analyze-button {
+        width: 100%;
+    }
+
+    .active-resume-card {
+        min-height: auto;
+    }
+
+    .score-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-snapshot {
+        padding: 19px;
+    }
+
+    .snapshot-main {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .snapshot-score strong {
+        font-size: 55px;
+    }
+
+    .snapshot-metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .ai-executive-card {
+        flex-direction: column;
+
+        padding: 21px;
+
+        margin-bottom: 55px;
+    }
+
+    .career-direction-main {
+        flex-direction: column;
+    }
+
+    .skill-overview {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .skill-total {
+        grid-column: span 2;
+    }
+
+    .skill-groups-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gap-card {
+        grid-template-columns:
+            24px 38px minmax(0, 1fr) 14px;
+
+        gap: 8px;
+
+        padding: 12px;
+    }
+
+    .gap-content p {
+        display: none;
+    }
+
+    .evidence-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .insights-grid .insight-panel:last-child {
+        grid-column: auto;
+    }
+
+    .career-action-center {
+        padding:
+            48px 18px;
+
+        border-radius: 21px;
+    }
+
+    .career-action-center h2 {
+        font-size: 29px;
+    }
+
+    .action-center-buttons {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .career-action-center button {
+        width: 100%;
+    }
+
+    .resume-footer {
+        padding-top: 18px;
+    }
+}
+
+
+/* ============================================================
+   30. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ============================================================
+   31. ACCESSIBILITY
+   ============================================================ */
+
+.resume-page button:focus-visible,
+.resume-page label:focus-visible {
+    outline: 2px solid var(--resume-cyan);
+
+    outline-offset: 3px;
+}
+
+.resume-page ::selection {
+    color: white;
+
+    background: rgba(99, 102, 241, 0.4);
+}
+
+
+/* ============================================================
+   END — CareerMind AI Resume Intelligence
+   ============================================================ */
